@@ -200,31 +200,17 @@
     </div>
 
     <!--campo usado-->
-    <div class="form-group row">
-      <label class="col-form-label col-sm-2 offset-sm-2" for="Usado">
-        Usado <span class="text-danger">*</span>
-      </label>
-      <div class="col-sm-6">
-        <input
-          type="checkbox"
-          class="form-control text-uppercase"
-          formControlName="Usado"
-          [ngClass]="{
-            'is-invalid':
-              (FormRegistro.controls.Usado.touched || submitted) &&
-              FormRegistro.controls.Usado.errors
-          }"
-        />
-        <span
-          class="text-danger"
-          *ngIf="
-            (FormRegistro.controls.Usado.touched || submitted) &&
-            FormRegistro.controls.Usado.errors &&
-            FormRegistro.controls.Usado.errors.required
-          "
-        >
-          Dato requerido
-        </span>
+    <div class="row">
+      <div class="col-sm-4 col-md-3 offset-md-1">
+        <label class="col-form-label" for="Usado">Usado:</label>
+      </div>
+      <div class="col-sm-8 col-md-6">
+        <!-- ref?? disabled html no fucniona en reactive forms? -->
+        <select class="form-control" name="Usado" formControlName="Usado">
+          <option *ngFor="let opt of OpcionesUsado" [ngValue]="opt.Id">
+            ‌{{ opt.Nombre }}
+          </option>
+        </select>
       </div>
     </div>
   </fieldset>

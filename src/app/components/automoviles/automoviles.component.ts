@@ -17,6 +17,11 @@ export class AutomovilesComponent implements OnInit {
     C: '(Consultar)',
     L: '(Listado)',
   };
+  OpcionesUsado = [
+    { Id: null, Nombre: '' },
+    { Id: true, Nombre: 'SI' },
+    { Id: false, Nombre: 'NO' },
+  ];
   AccionABMC = 'L'; // inicialmente inicia en el listado de articulos (buscar con parametros)
   Mensajes = {
     SD: ' No se encontraron registros...',
@@ -35,7 +40,7 @@ export class AutomovilesComponent implements OnInit {
     this.FormRegistro = this.formBuilder.group({
       Marca: ['', [Validators.required, Validators.maxLength(100)]],
       Modelo: ['', [Validators.required, Validators.maxLength(100)]],
-      Anio: [null, [Validators.required, Validators.pattern('[0-9]')]],
+      Anio: [null, [Validators.required, Validators.pattern('[0-9]{1,4}')]],
       FechaAlta: [
         null,
         [
@@ -45,7 +50,7 @@ export class AutomovilesComponent implements OnInit {
           ),
         ],
       ],
-      Usado: [null, [Validators.required]],
+      Usado: [true, [Validators.required]],
     });
   }
   Buscar() {
@@ -77,10 +82,11 @@ export class AutomovilesComponent implements OnInit {
     }
     //hacemos una copia de los datos del formulario, para modificar la fecha y luego enviarlo al servidor
     const itemCopy = { ...this.FormRegistro.value };
+    console.log(itemCopy);
     //convertir fecha de string dd/MM/yyyy a ISO para que la entienda webapi
     var arrFecha = itemCopy.FechaAlta.substr(0, 10).split('/');
     if (arrFecha.length == 3) {
-      itemCopy.FechaNacimiento = new Date(
+      itemCopy.FechaAlta = new Date(
         arrFecha[2],
         arrFecha[1] - 1,
         arrFecha[0]
