@@ -53,7 +53,12 @@ export class AutomovilesComponent implements OnInit {
       this.Items = res;
     });
   }
-  Agregar() {}
+  Agregar() {
+    this.FormRegistro.reset();
+    this.AccionABMC = 'A';
+    this.submitted = false;
+    this.FormRegistro.markAsUntouched();
+  }
   Volver() {
     this.AccionABMC = 'L';
   }

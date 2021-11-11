@@ -51,7 +51,7 @@
     <!--campo marca-->
     <div class="form-group row">
       <label class="col-form-label col-sm-2 offset-sm-2" for="Marca">
-        Nombre <span class="text-danger">*</span>
+        Marca <span class="text-danger">*</span>
       </label>
       <div class="col-sm-6">
         <input
@@ -78,8 +78,44 @@
           class="text-danger"
           *ngIf="
             (FormRegistro.controls.Marca.touched || submitted) &&
-            (FormRegistro.controls.Marca.errors?.minlength ||
-              FormRegistro.controls.Marca.errors?.maxlength)
+            FormRegistro.controls.Marca.errors?.maxlength
+          "
+          >Dato texto de hasta 100 caracteres</span
+        >
+      </div>
+    </div>
+
+    <!--campo modelo-->
+    <div class="form-group row">
+      <label class="col-form-label col-sm-2 offset-sm-2" for="Modelo">
+        Modelo <span class="text-danger">*</span>
+      </label>
+      <div class="col-sm-6">
+        <input
+          type="text"
+          class="form-control text-uppercase"
+          formControlName="Modelo"
+          [ngClass]="{
+            'is-invalid':
+              (FormRegistro.controls.Modelo.touched || submitted) &&
+              FormRegistro.controls.Modelo.errors
+          }"
+        />
+        <span
+          class="text-danger"
+          *ngIf="
+            (FormRegistro.controls.Modelo.touched || submitted) &&
+            FormRegistro.controls.Modelo.errors &&
+            FormRegistro.controls.Modelo.errors.required
+          "
+        >
+          Dato requerido
+        </span>
+        <span
+          class="text-danger"
+          *ngIf="
+            (FormRegistro.controls.Modelo.touched || submitted) &&
+            FormRegistro.controls.Modelo.errors?.maxlength
           "
           >Dato texto de hasta 100 caracteres</span
         >
@@ -88,27 +124,27 @@
 
     <!--campo telefono-->
     <div class="row form-group">
-      <label class="col-form-label col-sm-2 offset-sm-2" for="Telefono">
-        Telefono <span class="text-danger">*</span>
+      <label class="col-form-label col-sm-2 offset-sm-2" for="Anio">
+        Año <span class="text-danger">*</span>
       </label>
       <div class="col-sm-6">
         <input
           type="text"
-          name="Telefono"
+          name="Anio"
           class="form-control"
           formControlName="Telefono"
           [ngClass]="{
             'is-invalid':
-              (FormRegistro.controls.Telefono.touched || submitted) &&
-              FormRegistro.controls.Telefono.errors
+              (FormRegistro.controls.Anio.touched || submitted) &&
+              FormRegistro.controls.Anio.errors
           }"
         />
         <span
           class="text-danger"
           *ngIf="
-            (FormRegistro.controls.Nombre.touched || submitted) &&
-            FormRegistro.controls.Telefono.errors &&
-            FormRegistro.controls.Telefono.errors.required
+            (FormRegistro.controls.Marca.touched || submitted) &&
+            FormRegistro.controls.Anio.errors &&
+            FormRegistro.controls.Anio.errors.required
           "
         >
           Dato requerido
@@ -116,37 +152,37 @@
         <span
           class="text-danger"
           *ngIf="
-            (FormRegistro.controls.Nombre.touched || submitted) &&
-            FormRegistro.controls.Telefono.errors?.pattern
+            (FormRegistro.controls.Marca.touched || submitted) &&
+            FormRegistro.controls.Anio.errors?.pattern
           "
         >
-          Dato numérico, hasta 9 dígitos.
+          Dato numérico.
         </span>
       </div>
     </div>
 
-    <!--campo fechanacimiento-->
+    <!--campo fechaalta-->
     <div class="form-group row">
       <label class="col-form-label col-sm-2 offset-sm-2">
-        Fecha de Nacimiento <span class="text-danger">*</span>
+        Fecha de Alta <span class="text-danger">*</span>
       </label>
       <div class="col-sm-6">
         <input
           class="form-control"
-          name="FechaNacimiento"
+          name="FechaAlta"
           formControlName="FechaNacimiento"
           [ngClass]="{
             'is-invalid':
-              (FormRegistro.controls.FechaNacimiento.touched || submitted) &&
-              FormRegistro.controls.FechaNacimiento.errors
+              (FormRegistro.controls.FechaAlta.touched || submitted) &&
+              FormRegistro.controls.FechaAlta.errors
           }"
         />
         <span
           class="text-danger"
           *ngIf="
-            (FormRegistro.controls.Nombre.touched || submitted) &&
-            FormRegistro.controls.FechaNacimiento.errors &&
-            FormRegistro.controls.FechaNacimiento.errors.required
+            (FormRegistro.controls.Marca.touched || submitted) &&
+            FormRegistro.controls.FechaAlta.errors &&
+            FormRegistro.controls.FechaAlta.errors.required
           "
         >
           Dato requerido
@@ -154,11 +190,40 @@
         <span
           class="text-danger"
           *ngIf="
-            (FormRegistro.controls.Nombre.touched || submitted) &&
-            FormRegistro.controls.FechaNacimiento.errors?.pattern
+            (FormRegistro.controls.Marca.touched || submitted) &&
+            FormRegistro.controls.FechaAlta.errors?.pattern
           "
         >
           Dato fecha, formato dd/mm/aaaa.
+        </span>
+      </div>
+    </div>
+
+    <!--campo usado-->
+    <div class="form-group row">
+      <label class="col-form-label col-sm-2 offset-sm-2" for="Usado">
+        Usado <span class="text-danger">*</span>
+      </label>
+      <div class="col-sm-6">
+        <input
+          type="checkbox"
+          class="form-control text-uppercase"
+          formControlName="Usado"
+          [ngClass]="{
+            'is-invalid':
+              (FormRegistro.controls.Usado.touched || submitted) &&
+              FormRegistro.controls.Usado.errors
+          }"
+        />
+        <span
+          class="text-danger"
+          *ngIf="
+            (FormRegistro.controls.Usado.touched || submitted) &&
+            FormRegistro.controls.Usado.errors &&
+            FormRegistro.controls.Usado.errors.required
+          "
+        >
+          Dato requerido
         </span>
       </div>
     </div>
