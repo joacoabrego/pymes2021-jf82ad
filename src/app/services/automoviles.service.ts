@@ -6,8 +6,9 @@ import {
   HttpParams,
 } from '@angular/common/http';
 import { Automovil } from '../models/automovil';
-@Injectable({ provideIn: 'root' })
+@Injectable({ providedIn: 'root' })
 export class AutomovilesService {
+  resourceUrl: string;
   constructor(private httpClient: HttpClient) {
     this.resourceUrl = 'https://pav2.azurewebsites.net/api/Automoviles';
   }

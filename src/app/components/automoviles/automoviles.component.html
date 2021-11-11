@@ -1,0 +1,45 @@
+<!-- Tabla de automoviles -->
+<div *ngIf="AccionABMC == 'L'">
+  <div class="row justify-content-center">
+    <button type="button" class="btn btn-primary" (click)="Buscar()">
+      <span class="fas fa-search"> </span> Buscar
+    </button>
+    &nbsp;
+    <button type="button" class="btn btn-primary" (click)="Agregar()">
+      <span class="fas fa-plus"> </span>
+      Agregar
+    </button>
+  </div>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th class="text-center">IdAutomovil</th>
+        <th class="text-center">Marca</th>
+        <th class="text-center">Modelo</th>
+        <th class="text-center">Año</th>
+        <th class="text-center">FechaAlta</th>
+        <th class="text-center">Usado</th>
+        <th class="text-center text-nowrap">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of Items">
+        <td>{{ item.IdAutomovil }}</td>
+        <td>{{ item.Marca | uppercase }}</td>
+        <td>{{ item.Modelo | uppercase }}</td>
+        <td>{{ item.Anio }}</td>
+        <td>{{ item.FechaAlta | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ item.Usado }}</td>
+        <td>
+          <button
+            type="button"
+            class="brn btn-primary"
+            (click)="Consultar(item)"
+          >
+            Ver
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
