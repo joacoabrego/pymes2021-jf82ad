@@ -122,7 +122,7 @@
       </div>
     </div>
 
-    <!--campo telefono-->
+    <!--campo Año-->
     <div class="row form-group">
       <label class="col-form-label col-sm-2 offset-sm-2" for="Anio">
         Año <span class="text-danger">*</span>
@@ -132,7 +132,7 @@
           type="text"
           name="Anio"
           class="form-control"
-          formControlName="Telefono"
+          formControlName="Anio"
           [ngClass]="{
             'is-invalid':
               (FormRegistro.controls.Anio.touched || submitted) &&
@@ -170,7 +170,7 @@
         <input
           class="form-control"
           name="FechaAlta"
-          formControlName="FechaNacimiento"
+          formControlName="FechaAlta"
           [ngClass]="{
             'is-invalid':
               (FormRegistro.controls.FechaAlta.touched || submitted) &&

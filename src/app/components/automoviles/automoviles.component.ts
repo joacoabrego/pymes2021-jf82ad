@@ -62,6 +62,36 @@ export class AutomovilesComponent implements OnInit {
   Volver() {
     this.AccionABMC = 'L';
   }
-  Consultar(item) {}
-  Grabar() {}
+  Consultar(item) {
+    window.scroll(0, 0);
+    const itemCopy = { ...item };
+    var arrFecha = itemCopy.FechaAlta.substr(0, 10).split('-');
+    itemCopy.FechaAlta = arrFecha[2] + '/' + arrFecha[1] + '/' + arrFecha[0];
+    this.AccionABMC = 'C';
+    this.FormRegistro.patchValue(itemCopy);
+  }
+  Grabar() {
+    this.submitted = true;
+    if (this.FormRegistro.invalid) {
+      return;
+    }
+    //hacemos una copia de los datos del formulario, para modificar la fecha y luego enviarlo al servidor
+    const itemCopy = { ...this.FormRegistro.value };
+    //convertir fecha de string dd/MM/yyyy a ISO para que la entienda webapi
+    var arrFecha = itemCopy.FechaAlta.substr(0, 10).split('/');
+    if (arrFecha.length == 3) {
+      itemCopy.FechaNacimiento = new Date(
+        arrFecha[2],
+        arrFecha[1] - 1,
+        arrFecha[0]
+      ).toISOString();
+    }
+    if (this.AccionABMC == 'A') {
+      this.automovilesService.post(itemCopy).subscribe((res: any) => {
+        this.Volver();
+        this.modalDialogService.Alert('Registro agregado correctamente.');
+        this.Buscar();
+      });
+    }
+  }
 }
