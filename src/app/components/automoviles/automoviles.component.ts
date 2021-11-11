@@ -31,8 +31,32 @@ export class AutomovilesComponent implements OnInit {
     private modalDialogService: ModalDialogService
   ) {}
 
-  ngOnInit() {}
-  Buscar() {}
+  ngOnInit() {
+    this.FormRegistro = this.formBuilder.group({
+      Marca: ['', [Validators.required, Validators.maxLength(100)]],
+      Modelo: ['', [Validators.required, Validators.maxLength(100)]],
+      Anio: [null, [Validators.required, Validators.pattern('[0-9]')]],
+      FechaAlta: [
+        null,
+        [
+          Validators.required,
+          Validators.pattern(
+            '(0[1-9]|[12][0-9]|3[01])[-/](0[1-9]|1[012])[-/](19|20)[0-9]{2}'
+          ),
+        ],
+      ],
+      Usado: [null, [Validators.required]],
+    });
+  }
+  Buscar() {
+    this.automovilesService.get().subscribe((res: any) => {
+      this.Items = res;
+    });
+  }
   Agregar() {}
-  Consultar() {}
+  Volver() {
+    this.AccionABMC = 'L';
+  }
+  Consultar(item) {}
+  Grabar() {}
 }

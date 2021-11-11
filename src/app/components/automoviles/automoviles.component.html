@@ -43,3 +43,150 @@
     </tbody>
   </table>
 </div>
+
+<!-- Formulario de alta y consulta -->
+
+<form name="FormRegistro" *ngIf="AccionABMC != 'L'" [formGroup]="FormRegistro">
+  <fieldset [disabled]="AccionABMC === 'C'">
+    <!--campo marca-->
+    <div class="form-group row">
+      <label class="col-form-label col-sm-2 offset-sm-2" for="Marca">
+        Nombre <span class="text-danger">*</span>
+      </label>
+      <div class="col-sm-6">
+        <input
+          type="text"
+          class="form-control text-uppercase"
+          formControlName="Marca"
+          [ngClass]="{
+            'is-invalid':
+              (FormRegistro.controls.Marca.touched || submitted) &&
+              FormRegistro.controls.Marca.errors
+          }"
+        />
+        <span
+          class="text-danger"
+          *ngIf="
+            (FormRegistro.controls.Marca.touched || submitted) &&
+            FormRegistro.controls.Marca.errors &&
+            FormRegistro.controls.Marca.errors.required
+          "
+        >
+          Dato requerido
+        </span>
+        <span
+          class="text-danger"
+          *ngIf="
+            (FormRegistro.controls.Marca.touched || submitted) &&
+            (FormRegistro.controls.Marca.errors?.minlength ||
+              FormRegistro.controls.Marca.errors?.maxlength)
+          "
+          >Dato texto de hasta 100 caracteres</span
+        >
+      </div>
+    </div>
+
+    <!--campo telefono-->
+    <div class="row form-group">
+      <label class="col-form-label col-sm-2 offset-sm-2" for="Telefono">
+        Telefono <span class="text-danger">*</span>
+      </label>
+      <div class="col-sm-6">
+        <input
+          type="text"
+          name="Telefono"
+          class="form-control"
+          formControlName="Telefono"
+          [ngClass]="{
+            'is-invalid':
+              (FormRegistro.controls.Telefono.touched || submitted) &&
+              FormRegistro.controls.Telefono.errors
+          }"
+        />
+        <span
+          class="text-danger"
+          *ngIf="
+            (FormRegistro.controls.Nombre.touched || submitted) &&
+            FormRegistro.controls.Telefono.errors &&
+            FormRegistro.controls.Telefono.errors.required
+          "
+        >
+          Dato requerido
+        </span>
+        <span
+          class="text-danger"
+          *ngIf="
+            (FormRegistro.controls.Nombre.touched || submitted) &&
+            FormRegistro.controls.Telefono.errors?.pattern
+          "
+        >
+          Dato numérico, hasta 9 dígitos.
+        </span>
+      </div>
+    </div>
+
+    <!--campo fechanacimiento-->
+    <div class="form-group row">
+      <label class="col-form-label col-sm-2 offset-sm-2">
+        Fecha de Nacimiento <span class="text-danger">*</span>
+      </label>
+      <div class="col-sm-6">
+        <input
+          class="form-control"
+          name="FechaNacimiento"
+          formControlName="FechaNacimiento"
+          [ngClass]="{
+            'is-invalid':
+              (FormRegistro.controls.FechaNacimiento.touched || submitted) &&
+              FormRegistro.controls.FechaNacimiento.errors
+          }"
+        />
+        <span
+          class="text-danger"
+          *ngIf="
+            (FormRegistro.controls.Nombre.touched || submitted) &&
+            FormRegistro.controls.FechaNacimiento.errors &&
+            FormRegistro.controls.FechaNacimiento.errors.required
+          "
+        >
+          Dato requerido
+        </span>
+        <span
+          class="text-danger"
+          *ngIf="
+            (FormRegistro.controls.Nombre.touched || submitted) &&
+            FormRegistro.controls.FechaNacimiento.errors?.pattern
+          "
+        >
+          Dato fecha, formato dd/mm/aaaa.
+        </span>
+      </div>
+    </div>
+  </fieldset>
+
+  <!-- Botones Grabar, Cancelar/Volver' -->
+  <div class="row justify-content-center">
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="Grabar()"
+      *ngIf="AccionABMC == 'A'"
+    >
+      <span class="fas fa-check"></span> Grabar
+    </button>
+    &nbsp;
+    <button type="button" class="btn btn-warning" (click)="Volver()">
+      <span class="fas fa-undo"></span>
+      {{ AccionABMC == 'A' ? 'Cancelar' : 'Volver' }}
+    </button>
+  </div>
+
+  <!--texto: Revisar los datos ingresados...-->
+  <div
+    id="divMsjFormRegistro"
+    class="row alert alert-danger"
+    *ngIf="submitted && FormRegistro.invalid"
+  >
+    <span class="fas fa-exclamation-sign"></span>{{ Mensajes['RD'] }}
+  </div>
+</form>
